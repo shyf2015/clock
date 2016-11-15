@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大钟表</title>
+	<link rel="stylesheet" href="clock.css">
+</head>
+<body>
+	<div class="outline">
+		<div class="inline">
+			<p><img src="http://sandbox.runjs.cn/uploads/rs/296/iehoqtsc/arrow3.png" alt=""></p>		
+			<p><img src="http://sandbox.runjs.cn/uploads/rs/296/iehoqtsc/arrow2.png" alt=""></p>
+			<p><img src="http://sandbox.runjs.cn/uploads/rs/296/iehoqtsc/arrow1.png" alt=""></p>
+		</div>
+	</div>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	//var inline = document.getElementById('inline');
+	//for(var i=0;i<60;i++){
+	//	var span = document.createElement('span');
+	//	inline.appendChild(span);
+	//}
+(function(){
+	for(var i=0;i<60;i++){
+		$('.inline').append('<span></span>');
+		$('span').eq(i).css({
+			'transform': 'rotate('+6*i+'deg) translateY('+(-100)+'px)'
+		})
+	}
+	for(var i=1;i<13;i++){
+		$('.inline').append('<p>'+i+'</p>');
+		$('p').eq(i+2).css({
+			'transform': 'rotate('+30*i+'deg) translateY('+(-75)+'px)'
+		})
+	}
+	time();
+	function time(){
+		var t = new Date();
+		var second = t.getSeconds();
+		var minute = t.getMinutes();
+		var hour = t.getHours();
+		var s_deg = 6*second+180;
+		var m_deg = 6*minute+180+0.1*second;
+		var h_deg = hour*360/12+180+0.5*minute;
+		$('.inline p').eq(0).css({
+			'transform': 'rotate('+s_deg+'deg)'
+		})
+		$('.inline p').eq(1).css({
+			'transform': 'rotate('+m_deg+'deg)'
+		})
+		$('.inline p').eq(2).css({
+			'transform': 'rotate('+h_deg+'deg)'
+		})
+		setTimeout(time,1000);
+	}
+})()
+	
+</script>
+</body>
+</html>
